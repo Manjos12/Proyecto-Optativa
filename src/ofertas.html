@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ofertas — Supermercado Azul</title>
+    <script>
+        tailwind_config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'azul-oscuro': '#0A2540',
+                        'azul-medio': '#1E40AF',
+                        'azul-claro': '#3B82F6',
+                        'gris-claro': '#F3F4F6'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui']
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .pulse-animation { animation: pulse 2s ease-in-out infinite; }
+    </style>
+</head>
+<body class="antialiased text-gray-800 bg-gris-claro font-sans">
+
+    <!-- NAVBAR -->
+    <header class="fixed inset-x-0 top-0 z-50 bg-[var(--tw-color, #0A2540)] bg-[--nav-bg,#0A2540] shadow-lg">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-3 text-white">
+                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center ring-1 ring-white/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 7h12l-2-7M16 17a1 1 0 11-2 0 1 1 0 012 0zM9 17a1 1 0 11-2 0 1 1 0 012 0z" />
+                        </svg>
+                    </div>
+                    <span class="font-semibold text-lg">Supermercado Azul</span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-6 text-sm">
+                    <a href="index.html" class="text-white hover:text-azul-claro transition">Inicio</a>
+                    <a href="productos.html" class="text-white hover:text-azul-claro transition">Productos</a>
+                    <a href="ofertas.html" class="text-white hover:text-azul-claro transition">Ofertas</a>
+                    <a href="nosotros.html" class="text-white hover:text-azul-claro transition">Nosotros</a>
+                    <a href="contacto.html" class="text-white hover:text-azul-claro transition">Contacto</a>
+                <a href="inicio de sesion.html" onclick="alert('Recuerda proteger bien tus credenciales Carlos Lugo!!')" class="block mt-2 bg-white/10 px-4 py-2 rounded">Iniciar sesión</a>
+                </nav>
+
+                <div class="md:hidden">
+                    <button id="nav-toggle" aria-label="Abrir menú" class="text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="md:hidden bg-[rgba(10,37,64,0.95)] text-white px-6 py-4 hidden">
+            <a href="index.html" class="block py-2">Inicio</a>
+            <a href="productos.html" class="block py-2">Productos</a>
+            <a href="ofertas.html" class="block py-2">Ofertas</a>
+            <a href="nosotros.html" class="block py-2">Nosotros</a>
+            <a href="contacto.html" class="block py-2">Contacto</a>
+                <a href="inicio de sesion.html" onclick="alert('Recuerda proteger bien tus credenciales Carlos Lugo!!')" class="block mt-2 bg-white/10 px-4 py-2 rounded">Iniciar sesión</a>
+        </div>
+    </header>
+
+    <main class="pt-20 pb-12">
+        <div class="container mx-auto px-6 lg:px-8">
+            <!-- Banner principal -->
+            <div class="bg-gradient-to-r from-red-600 to-red-500 rounded-2xl p-6 sm:p-8 shadow-lg text-white mb-8">
+                <div class="text-center">
+                    <h1 class="text-3xl sm:text-4xl font-bold">🔥 Ofertas de la Semana</h1>
+                    <p class="mt-3 text-base sm:text-lg">Aprovecha descuentos increíbles en productos seleccionados</p>
+                    <div class="mt-6 inline-block bg-white/20 px-4 sm:px-6 py-3 rounded-full">
+                        <span class="text-sm">Oferta válida hasta: </span>
+                        <span id="countdown" class="font-bold text-lg sm:text-xl">Calculando...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ofertas destacadas -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-azul-oscuro">💥 Súper Ofertas</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <article class="bg-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 relative overflow-hidden animate-slide-up" style="animation-delay: 0.1s;">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white px-4 py-2 rounded-bl-2xl font-bold text-lg pulse-animation">
+                            -40%
+                        </div>
+                        <img src="img/manzanas.png" alt="Frutas" class="rounded-xl object-cover h-48 w-full hover:scale-110 transition duration-500" />
+                        <h3 class="mt-4 font-semibold text-lg">Pack Frutas Mixtas</h3>
+                        <p class="mt-1 text-gray-500 text-sm">Manzanas, bananos y fresas</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-2xl font-bold text-red-600">$14.900</div>
+                                <div class="text-sm text-gray-400 line-through">$24.900</div>
+                            </div>
+                            <button class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 hover:scale-110 transition">Comprar</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 relative overflow-hidden animate-slide-up" style="animation-delay: 0.2s;">
+                        <div class="absolute top-0 right-0 bg-blue-600 text-white px-4 py-2 rounded-bl-2xl font-bold text-lg pulse-animation">
+                            -30%
+                        </div>
+                        <img src="img/queso campesino.png" alt="Lácteos" class="rounded-xl object-cover h-48 w-full hover:scale-110 transition duration-500" />
+                        <h3 class="mt-4 font-semibold text-lg">Combo Lácteos</h3>
+                        <p class="mt-1 text-gray-500 text-sm">Leche + Queso + Yogurt</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-2xl font-bold text-red-600">$26.000</div>
+                                <div class="text-sm text-gray-400 line-through">$37.200</div>
+                            </div>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 hover:scale-110 transition">Comprar</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 relative overflow-hidden animate-slide-up" style="animation-delay: 0.3s;">
+                        <div class="absolute top-0 right-0 bg-green-600 text-white px-4 py-2 rounded-bl-2xl font-bold text-lg pulse-animation">
+                            -25%
+                        </div>
+                        <img src="img/lechuga.png" alt="Verduras" class="rounded-xl object-cover h-48 w-full hover:scale-110 transition duration-500" />
+                        <h3 class="mt-4 font-semibold text-lg">Verduras Orgánicas</h3>
+                        <p class="mt-1 text-gray-500 text-sm">Lechugas, tomates y más</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-2xl font-bold text-red-600">$11.200</div>
+                                <div class="text-sm text-gray-400 line-through">$14.900</div>
+                            </div>
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 hover:scale-110 transition">Comprar</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 relative overflow-hidden animate-slide-up" style="animation-delay: 0.4s;">
+                        <div class="absolute top-0 right-0 bg-purple-600 text-white px-4 py-2 rounded-bl-2xl font-bold text-lg pulse-animation">
+                            -20%
+                        </div>
+                        <img src="img/jugo natural.png" alt="Bebidas" class="rounded-xl object-cover h-48 w-full hover:scale-110 transition duration-500" />
+                        <h3 class="mt-4 font-semibold text-lg">Pack Bebidas</h3>
+                        <p class="mt-1 text-gray-500 text-sm">6 jugos naturales surtidos</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-2xl font-bold text-red-600">$29.800</div>
+                                <div class="text-sm text-gray-400 line-through">$37.200</div>
+                            </div>
+                            <button class="bg-purple-600 text-white px-4 py-2 rounded-full hover:bg-purple-700 hover:scale-110 transition">Comprar</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 relative overflow-hidden animate-slide-up" style="animation-delay: 0.5s;">
+                        <div class="absolute top-0 right-0 bg-yellow-600 text-white px-4 py-2 rounded-bl-2xl font-bold text-lg pulse-animation">
+                            -35%
+                        </div>
+                        <img src="img/shampoo.png" alt="Aseo" class="rounded-xl object-cover h-48 w-full hover:scale-110 transition duration-500" />
+                        <h3 class="mt-4 font-semibold text-lg">Kit Aseo Personal</h3>
+                        <p class="mt-1 text-gray-500 text-sm">Shampoo, jabón y más</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-2xl font-bold text-red-600">$32.200</div>
+                                <div class="text-sm text-gray-400 line-through">$49.600</div>
+                            </div>
+                            <button class="bg-yellow-600 text-white px-4 py-2 rounded-full hover:bg-yellow-700 hover:scale-110 transition">Comprar</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 relative overflow-hidden animate-slide-up" style="animation-delay: 0.6s;">
+                        <div class="absolute top-0 right-0 bg-pink-600 text-white px-4 py-2 rounded-bl-2xl font-bold text-lg pulse-animation">
+                            -50%
+                        </div>
+                        <img src="img/detergente.png" alt="Limpieza" class="rounded-xl object-cover h-48 w-full hover:scale-110 transition duration-500" />
+                        <h3 class="mt-4 font-semibold text-lg">Mega Pack Limpieza</h3>
+                        <p class="mt-1 text-gray-500 text-sm">Todo para tu hogar</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-2xl font-bold text-red-600">$37.200</div>
+                                <div class="text-sm text-gray-400 line-through">$74.500</div>
+                            </div>
+                            <button class="bg-pink-600 text-white px-4 py-2 rounded-full hover:bg-pink-700 hover:scale-110 transition">Comprar</button>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- Banner de suscripción -->
+            <div class="bg-blue-900 from-azul-medio to-azul-claro rounded-2xl p-8 text-white text-center">
+                <h2 class="text-2xl font-bold">📧 Suscríbete y recibe ofertas exclusivas</h2>
+                <p class="mt-3">Entérate primero de nuestras promociones y descuentos especiales</p>
+                <form class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+                    <input type="email" placeholder="tu@email.com" class="px-4 py-3 rounded-full w-full sm:w-80 text-gray-800" />
+                    <button class="bg-blue-800 text-azul-medio px-6 py-3 rounded-full font-medium hover:scale-105 transition">Suscribirme</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[var(--tw-color,#0A2540)] text-white">
+        <div class="container mx-auto px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="font-semibold">Información</h4>
+                    <ul class="mt-4 space-y-2 text-sm text-white/80">
+                        <li>Políticas</li>
+                        <li>Términos</li>
+                        <li>Blog</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold">Soporte</h4>
+                    <ul class="mt-4 space-y-2 text-sm text-white/80">
+                        <li>Ayuda</li>
+                        <li>FAQ</li>
+                        <li>Contacto</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold">Recursos</h4>
+                    <ul class="mt-4 space-y-2 text-sm text-white/80">
+                        <li>Recetas</li>
+                        <li>Consejos</li>
+                        <li>Productos locales</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm">© 2025 Supermercado Azul — Desarrollado por Jose Manuel Sanabrias</p>
+                <div class="flex gap-3">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-500 hover:scale-110 transition">F</a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-500 hover:scale-110 transition">X</a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-500 hover:scale-110 transition">I</a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-500 hover:scale-110 transition">W</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            const sunday = new Date();
+            sunday.setDate(now.getDate() + (7 - now.getDay()));
+            sunday.setHours(23, 59, 59, 999);
+            
+            const diff = sunday - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').textContent = ${days}d ${hours}h ${mins}m ${secs}s;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Nav toggle
+        document.getElementById('nav-toggle')?.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
