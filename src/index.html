@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="css/output.css">
+        <title>Supermercado Azul — Inicio</title>
+
+        <script>
+            // Tailwind CDN configuration: extend font and enable JIT-like features
+            tailwind_config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'azul-oscuro': '#0A2540',
+                            'azul-medio': '#1E40AF',
+                            'azul-claro': '#3B82F6',
+                            'gris-claro': '#F3F4F6'
+                        },
+                        fontFamily: {
+                            sans: ['Inter', 'ui-sans-serif', 'system-ui']
+                        }
+                    }
+                }
+            }
+        </script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            html { scroll-behavior: smooth; }
+            .glass { background: rgba(255,255,255,0.6); backdrop-filter: blur(6px); }
+            .modal-backdrop { backdrop-filter: blur(4px); }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: scale(0.95); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            
+            @keyframes slideInUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+            
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+            
+            @keyframes shimmer {
+                0% { background-position: -1000px 0; }
+                100% { background-position: 1000px 0; }
+            }
+            
+            .modal-content { animation: fadeIn 0.3s ease-out; }
+            .animate-slide-up { animation: slideInUp 0.6s ease-out; }
+            .animate-bounce-slow { animation: bounce 2s infinite; }
+            .animate-pulse-slow { animation: pulse 3s infinite; }
+            
+            .shimmer-effect {
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+                background-size: 200% 100%;
+                animation: shimmer 2s infinite;
+            }
+            
+            .hover-glow:hover {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            }
+        </style>
+    </head>
+    <body class="antialiased text-gray-800 bg-white font-sans">
+
+        <!-- NAVBAR -->
+        <header class="fixed inset-x-0 top-0 z-50 bg-[var(--tw-color, #0A2540)] bg-[--nav-bg,#0A2540] shadow-lg">
+            <div class="container mx-auto px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <a href="#" class="flex items-center gap-3 text-white">
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center ring-1 ring-white/10">
+                            <!-- simple cart icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 7h12l-2-7M16 17a1 1 0 11-2 0 1 1 0 012 0zM9 17a1 1 0 11-2 0 1 1 0 012 0z" />
+                            </svg>
+                        </div>
+                        <span class="font-semibold text-lg">Supermercado Azul</span>
+                    </a>
+
+                    <nav class="hidden md:flex items-center gap-6 text-sm">
+                        <a href="index.html" class="text-white hover:text-azul-claro transition">Inicio</a>
+                        <a href="productos.html" class="text-white hover:text-azul-claro transition">Productos</a>
+                        <a href="ofertas.html" class="text-white hover:text-azul-claro transition">Ofertas</a>
+                        <a href="nosotros.html" class="text-white hover:text-azul-claro transition">Nosotros</a>
+                        <a href="contacto.html" class="text-white hover:text-azul-claro transition">Contacto</a>
+                        <a href="inicio de sesion.html" onclick="alert('Recuerda proteger bien tus credenciales Carlos Lugo!!')" class="text-white px-4 py-2 rounded-md border border-white/10 hover:bg-white/10 transition">Iniciar sesión</a>
+                    </nav>
+
+                    <div class="md:hidden">
+                        <button id="nav-toggle" aria-label="Abrir menú" class="text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden bg-[rgba(10,37,64,0.95)] text-white px-6 py-4 hidden">
+                <a href="index.html" class="block py-2">Inicio</a>
+                <a href="productos.html" class="block py-2">Productos</a>
+                <a href="ofertas.html" class="block py-2">Ofertas</a>
+                <a href="nosotros.html" class="block py-2">Nosotros</a>
+                <a href="contacto.html" class="block py-2">Contacto</a>
+                <a href="inicio de sesion.html" onclick="alert('Recuerda proteger bien tus credenciales Carlos Lugo!!')" class="block mt-2 bg-white/10 px-4 py-2 rounded">Iniciar sesión</a>
+            </div>
+        </header>
+
+        <main class="pt-16">
+
+            <!-- HERO -->
+            <section class="relative min-h-[72vh]">
+                <div class="absolute inset-0">
+                    <img src="img/super.png" alt="Frutas frescas" class="w-full h-full object-cover brightness-[0.65]" />
+                </div>
+                <div class="relative z-10 container mx-auto px-6 lg:px-8 flex items-center justify-center min-h-[72vh]">
+                    <div class="text-center max-w-3xl text-white py-20 px-6 glass rounded-2xl">
+                        <h1 class="text-indigo-800 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight drop-shadow-md">Tu supermercado digital de confianza</h1>
+                        <p class="mt-4 text-lg sm:text-xl text-white/90">Calidad, frescura y precios justos a un clic</p>
+                        <div class="mt-8 flex justify-center gap-4">
+                            <a href="#productos" class="inline-block bg-[var(--tw-color, #1E40AF)] hover:bg-[var(--tw-hover,#1B3AA8)] text-white px-6 py-3 rounded-full font-medium shadow-lg transform hover:scale-105 transition duration-300">Explorar Productos</a>
+                            <a href="#ofertas" class="inline-block bg-white/10 text-white px-5 py-3 rounded-full font-medium border border-white/20 hover:bg-white/20 transition">Ver Ofertas</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRODUCTOS DESTACADOS -->
+            <section id="productos" class="container mx-auto px-6 lg:px-8 py-16">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold">Productos Destacados</h2>
+                    <a href="#" class="text-sm text-azul-medio hover:underline">Ver todo</a>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <!-- Sample product cards with modals -->
+                    <article class="bg-white rounded-2xl p-4 hover:shadow-2xl transform hover:scale-105 hover-glow transition duration-500 cursor-pointer animate-slide-up" onclick="openModal('modal1')">
+                        <img src="img/manzanas.png" alt="Manzanas Frescas" class="rounded-xl object-cover h-48 w-full" />
+                        <h3 class="mt-4 font-semibold">Manzanas Frescas</h3>
+                        <p class="mt-1 text-gray-500">Rojas y verdes - 1 kg</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="text-lg font-bold text-azul-medio">$8.500</div>
+                            <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:scale-110 transition">Ver más</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 hover:shadow-2xl transform hover:scale-105 hover-glow transition duration-500 cursor-pointer animate-slide-up" style="animation-delay: 0.1s" onclick="openModal('modal2')">
+                        <img src="img/leche entera.png" alt="Leche Entera" class="rounded-xl object-cover h-48 w-full" />
+                        <h3 class="mt-4 font-semibold">Leche Entera</h3>
+                        <p class="mt-1 text-gray-500">Fresca y pasteurizada - 1L</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="text-lg font-bold text-azul-medio">$4.200</div>
+                            <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:scale-110 transition">Ver más</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 hover:shadow-2xl transform hover:scale-105 hover-glow transition duration-500 cursor-pointer animate-slide-up" style="animation-delay: 0.2s" onclick="openModal('modal3')">
+                        <img src="img/lechuga.png" alt="Lechugas Frescas" class="rounded-xl object-cover h-48 w-full" />
+                        <h3 class="mt-4 font-semibold">Lechugas Frescas</h3>
+                        <p class="mt-1 text-gray-500">Orgánicas - Unidad</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="text-lg font-bold text-azul-medio">$3.500</div>
+                            <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:scale-110 transition">Ver más</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 hover:shadow-2xl transform hover:scale-105 hover-glow transition duration-500 cursor-pointer animate-slide-up" style="animation-delay: 0.3s" onclick="openModal('modal4')">
+                        <img src="img/jugo natural.png" alt="Jugos Naturales" class="rounded-xl object-cover h-48 w-full" />
+                        <h3 class="mt-4 font-semibold">Jugos Naturales</h3>
+                        <p class="mt-1 text-gray-500">Sin preservantes - 1L</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="text-lg font-bold text-azul-medio">$6.800</div>
+                            <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:scale-110 transition">Ver más</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 hover:shadow-2xl transform hover:scale-105 hover-glow transition duration-500 cursor-pointer animate-slide-up" style="animation-delay: 0.4s" onclick="openModal('modal5')">
+                        <img src="img/shampoo.png" alt="Shampoo Premium" class="rounded-xl object-cover h-48 w-full" />
+                        <h3 class="mt-4 font-semibold">Shampoo Premium</h3>
+                        <p class="mt-1 text-gray-500">Cuidado capilar - 400ml</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="text-lg font-bold text-azul-medio">$18.900</div>
+                            <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:scale-110 transition">Ver más</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 hover:shadow-2xl transform hover:scale-105 hover-glow transition duration-500 cursor-pointer animate-slide-up" style="animation-delay: 0.5s" onclick="openModal('modal6')">
+                        <img src="img/detergente.png" alt="Detergente Líquido" class="rounded-xl object-cover h-48 w-full" />
+                        <h3 class="mt-4 font-semibold">Detergente Líquido</h3>
+                        <p class="mt-1 text-gray-500">Limpieza profunda - 1L</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="text-lg font-bold text-azul-medio">$12.500</div>
+                            <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:scale-110 transition">Ver más</button>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-4 hover:shadow-2xl transform hover:scale-105 hover-glow transition duration-500 cursor-pointer animate-slide-up" style="animation-delay: 0.6s" onclick="openModal('modal7')">
+                        <img src="img/bananos.png" alt="Bananos Premium" class="rounded-xl object-cover h-48 w-full" />
+                        <h3 class="mt-4 font-semibold">Bananos Premium</h3>
+                        <p class="mt-1 text-gray-500">Maduros perfectos - 1 kg</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="text-lg font-bold text-azul-medio">$3.200</div>
+                            <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:scale-110 transition">Ver más</button>
+                        </div>
+                    </article>
+                        <h3 class="mt-4 font-semibold">Línea Aseo Completa</h3>
+                        <p class="mt-1 text-gray-500">Todo en uno</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <div class="text-lg font-bold text-azul-medio">$12.99</div>
+                            <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:scale-105 transition">Ver más</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- POR QUÉ COMPRAR CON NOSOTROS -->
+            <section class="bg-blue-50 py-12">
+                <div class="container mx-auto px-6 lg:px-8">
+                    <h2 class="text-2xl font-bold text-azul-oscuro">Por qué comprar con nosotros</h2>
+                    <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="bg-white rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-110 transition">
+                            <div class="text-3xl">🚚</div>
+                            <h3 class="mt-3 font-semibold">Envíos rápidos</h3>
+                            <p class="mt-2 text-sm text-gray-500">Entregas en 24-48 horas</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-110 transition">
+                            <div class="text-3xl">🥬</div>
+                            <h3 class="mt-3 font-semibold">Productos frescos</h3>
+                            <p class="mt-2 text-sm text-gray-500">Selección rigurosa de calidad</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-110 transition">
+                            <div class="text-3xl">💳</div>
+                            <h3 class="mt-3 font-semibold">Pagos seguros</h3>
+                            <p class="mt-2 text-sm text-gray-500">Protección de datos y devoluciones</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 flex flex-col items-center text-center transform hover:scale-110 transition">
+                            <div class="text-3xl">🤝</div>
+                            <h3 class="mt-3 font-semibold">Atención personalizada</h3>
+                            <p class="mt-2 text-sm text-gray-500">Soporte amigable y rápido</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OFERTAS (CARRUSEL) -->
+            <section id="ofertas" class="container mx-auto px-6 lg:px-8 py-16">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold">Ofertas de la semana</h2>
+
+                </div>
+
+                <div class="mt-6 relative">
+                    <div id="carousel" class="overflow-hidden">
+                        <div id="track" class="flex gap-6 transition-transform duration-700 ease-in-out will-change-transform">
+                            <!-- slide 1 -->
+                            <div class="min-w-full md:min-w-[60%] lg:min-w-[33%] bg-white rounded-2xl p-4 flex-shrink-0 hover:shadow-2xl transition-shadow duration-300">
+                                <div class="relative overflow-hidden rounded-xl">
+                                    <img src="img/queso campesino.png" alt="Oferta queso" class="rounded-xl object-cover w-full h-48 hover:scale-110 transition-transform duration-500" />
+                                    <span class="absolute top-3 left-3 bg-red-500 text-white text-xs px-3 py-1 rounded-full animate-pulse-slow">-25%</span>
+                                </div>
+                                <h3 class="mt-4 font-semibold">Queso Campesino</h3>
+                                <p class="text-sm text-gray-500">Sabor tradicional 500g</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="text-lg font-bold">$13.900 <span class="text-sm text-gray-400 line-through">$18.500</span></div>
+                                    <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:bg-azul-medio hover:scale-110 transition transform">Añadir</button>
+                                </div>
+                            </div>
+
+                            <!-- slide 2 -->
+                            <div class="min-w-full md:min-w-[60%] lg:min-w-[33%] bg-white rounded-2xl p-4 flex-shrink-0 hover:shadow-2xl transition-shadow duration-300">
+                                <div class="relative overflow-hidden rounded-xl">
+                                    <img src="img/fresas.png" alt="Oferta frutas" class="rounded-xl object-cover w-full h-48 hover:scale-110 transition-transform duration-500" />
+                                    <span class="absolute top-3 left-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full animate-pulse-slow">-20%</span>
+                                </div>
+                                <h3 class="mt-4 font-semibold">Fresas Orgánicas</h3>
+                                <p class="text-sm text-gray-500">Frescas del día 500g</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="text-lg font-bold">$9.600 <span class="text-sm text-gray-400 line-through">$12.000</span></div>
+                                    <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:bg-azul-medio hover:scale-110 transition transform">Añadir</button>
+                                </div>
+                            </div>
+
+                            <!-- slide 3 -->
+                            <div class="min-w-full md:min-w-[60%] lg:min-w-[33%] bg-white rounded-2xl p-4 flex-shrink-0 hover:shadow-2xl transition-shadow duration-300">
+                                <div class="relative overflow-hidden rounded-xl">
+                                    <img src="img/jugo natural.png" alt="Oferta jugo" class="rounded-xl object-cover w-full h-48 hover:scale-110 transition-transform duration-500" />
+                                    <span class="absolute top-3 left-3 bg-red-500 text-white text-xs px-3 py-1 rounded-full animate-pulse-slow">-30%</span>
+                                </div>
+                                <h3 class="mt-4 font-semibold">Jugo Natural</h3>
+                                <p class="text-sm text-gray-500">Sin conservantes 1L</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="text-lg font-bold">$3.850 <span class="text-sm text-gray-400 line-through">$5.500</span></div>
+                                    <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:bg-azul-medio hover:scale-110 transition transform">Añadir</button>
+                                </div>
+                            </div>
+                            
+                            <!-- slide 4 -->
+                            <div class="min-w-full md:min-w-[60%] lg:min-w-[33%] bg-white rounded-2xl p-4 flex-shrink-0 hover:shadow-2xl transition-shadow duration-300">
+                                <div class="relative overflow-hidden rounded-xl">
+                                    <img src="img/yogurt natural.png" alt="Oferta yogurt" class="rounded-xl object-cover w-full h-48 hover:scale-110 transition-transform duration-500" />
+                                    <span class="absolute top-3 left-3 bg-green-600 text-white text-xs px-3 py-1 rounded-full animate-pulse-slow">-15%</span>
+                                </div>
+                                <h3 class="mt-4 font-semibold">Yogurt Natural</h3>
+                                <p class="text-sm text-gray-500">Sin azúcar 1L</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="text-lg font-bold">$5.780 <span class="text-sm text-gray-400 line-through">$6.800</span></div>
+                                    <button class="bg-azul-claro text-white px-3 py-2 rounded-full hover:bg-azul-medio hover:scale-110 transition transform">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- indicators -->
+                    <div id="indicators" class="mt-6 flex gap-2 justify-center"></div>
+                </div>
+            </section>
+
+            <!-- SOBRE NOSOTROS -->
+            <section id="nosotros" class="container mx-auto px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&s=6b9f5aee3b2b5c0d4a6a1fbc865f1e6b" alt="Equipo de tienda" class="w-full rounded-2xl object-cover" />
+                    <div>
+                        <h2 class="text-2xl font-bold">Somos Supermercado Azul</h2>
+                        <p class="mt-4 text-gray-600">Somos un supermercado que combina tradición y tecnología, ofreciendo productos frescos con la comodidad de comprar desde casa.</p>
+                        <p class="mt-3 text-gray-500">Nuestra misión es facilitar alimentos de calidad con procesos modernos, entregas rápidas y atención cercana.</p>
+                        <div class="mt-6">
+                            <a href="#" class="inline-block bg-white border border-azul-medio text-azul-medio px-5 py-2 rounded-full font-medium hover:bg-azul-medio hover:text-white transition">Conócenos más</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CATEGORÍAS POPULARES -->
+            <section class="container mx-auto px-6 lg:px-8 py-12">
+                <h2 class="text-2xl font-bold">Categorías Populares</h2>
+                <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <a href="productos.html?cat=frutas" class="bg-white rounded-xl p-6 flex flex-col items-center text-center hover:bg-blue-100 hover:scale-105 transition cursor-pointer">
+                        <img src="img/frutas.png" alt="Frutas" class="w-16 h-16 object-contain" />
+                        <span class="mt-3 font-medium">Frutas</span>
+                    </a>
+                    <a href="productos.html?cat=verduras" class="bg-white rounded-xl p-6 flex flex-col items-center text-center hover:bg-blue-100 hover:scale-105 transition cursor-pointer">
+                        <img src="img/verdur.png" alt="Verduras" class="w-16 h-16 object-contain" />
+                        <span class="mt-3 font-medium">Verduras</span>
+                    </a>
+                    <a href="productos.html?cat=lacteos" class="bg-white rounded-xl p-6 flex flex-col items-center text-center hover:bg-blue-100 hover:scale-105 transition cursor-pointer">
+                        <img src="img/lacteos.png" alt="Lácteos" class="w-16 h-16 object-contain" />
+                        <span class="mt-3 font-medium">Lácteos</span>
+                    </a>
+                    <a href="productos.html?cat=aseo" class="bg-white rounded-xl p-6 flex flex-col items-center text-center hover:bg-blue-100 hover:scale-105 transition cursor-pointer">
+                        <img src="img/Aseo.png" alt="Aseo" class="w-16 h-16 object-contain" />
+                        <span class="mt-3 font-medium">Aseo</span>
+                    </a>
+                    <a href="productos.html?cat=bebidas" class="bg-white rounded-xl p-6 flex flex-col items-center text-center hover:bg-blue-100 hover:scale-105 transition cursor-pointer">
+                        <img src="img/bebidas.png" alt="Bebidas" class="w-16 h-16 object-contain" />
+                        <span class="mt-3 font-medium">Bebidas</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- SUSCRIPCIÓN -->
+            <section id="contacto" class="py-12">
+                <div class="container mx-auto px-6 lg:px-8">
+                    <div class="rounded-3xl p-8 bg-gradient-to-r from-blue-700 to-blue-500 text-white shadow-lg">
+                        <div class="md:flex md:items-center md:justify-between gap-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-blue-900">Suscríbete para recibir nuestras ofertas semanales</h3>
+                                <p class="mt-2 text-blue-700">Promociones exclusivas, recetas y novedades directamente en tu correo.</p>
+                            </div>
+                            <form class="mt-6 md:mt-0 flex gap-3">
+                                <input aria-label="Correo electrónico" type="email" placeholder="tu@correo.com" class="px-4 py-3 rounded-full w-full md:w-80 text-gray-800" />
+                                <button class="bg-white text-blue-700 px-5 py-3 rounded-full font-medium shadow hover:scale-105 transition">Suscribirme</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="bg-[var(--tw-color,#0A2540)] text-white">
+            <div class="container mx-auto px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-semibold">Información</h4>
+                        <ul class="mt-4 space-y-2 text-sm text-white/80">
+                            <li>Políticas</li>
+                            <li>Términos</li>
+                            <li>Blog</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Soporte</h4>
+                        <ul class="mt-4 space-y-2 text-sm text-white/80">
+                            <li>Ayuda</li>
+                            <li>FAQ</li>
+                            <li>Contacto</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Recursos</h4>
+                        <ul class="mt-4 space-y-2 text-sm text-white/80">
+                            <li>Recetas</li>
+                            <li>Consejos</li>
+                            <li>Productos locales</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p class="text-sm">© 2025 Supermercado Azul — Desarrollado por Jose Manuel Sanabrias</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-500 hover:scale-110 transition">F</a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-500 hover:scale-110 transition">X</a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-500 hover:scale-110 transition">I</a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-500 hover:scale-110 transition">W</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- MODALES DE PRODUCTOS -->
+        <div id="modal1" class="fixed inset-0 bg-black/60 modal-backdrop hidden items-center justify-center z-50" onclick="closeModal('modal1')">
+            <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 modal-content" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold text-azul-oscuro">Manzanas Frescas</h2>
+                    <button onclick="closeModal('modal1')" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                </div>
+                <img src="img/manzanas.png" alt="Manzanas" class="w-full h-64 object-cover rounded-xl mb-4" />
+                <p class="text-gray-600 mb-4">Manzanas premium importadas y nacionales. Crujientes, dulces y jugosas. Perfectas para snacks saludables o postres. Precio por kilogramo.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-3xl font-bold text-azul-medio">$8.500</span>
+                    <button class="bg-azul-claro text-white px-6 py-3 rounded-full hover:bg-azul-medio transition">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal2" class="fixed inset-0 bg-black/60 modal-backdrop hidden items-center justify-center z-50" onclick="closeModal('modal2')">
+            <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 modal-content" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold text-azul-oscuro">Leche Entera Premium</h2>
+                    <button onclick="closeModal('modal2')" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                </div>
+                <img src="img/leche entera.png" alt="Leche Entera" class="w-full h-64 object-cover rounded-xl mb-4" />
+                <p class="text-gray-600 mb-4">Leche entera de la más alta calidad, pasteurizada y ultra fresca. Rica en calcio y vitaminas. Presentación de 1 litro. Ideal para toda la familia.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-3xl font-bold text-azul-medio">$4.200</span>
+                    <button class="bg-azul-claro text-white px-6 py-3 rounded-full hover:bg-azul-medio transition">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal3" class="fixed inset-0 bg-black/60 modal-backdrop hidden items-center justify-center z-50" onclick="closeModal('modal3')">
+            <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 modal-content" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold text-azul-oscuro">Lechuga Orgánica</h2>
+                    <button onclick="closeModal('modal3')" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                </div>
+                <img src="img/lechuga.png" alt="Lechuga" class="w-full h-64 object-cover rounded-xl mb-4" />
+                <p class="text-gray-600 mb-4">Lechuga 100% orgánica cultivada sin pesticidas. Fresca, crujiente y llena de nutrientes. Perfecta para ensaladas saludables. Precio por unidad.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-3xl font-bold text-azul-medio">$3.500</span>
+                    <button class="bg-azul-claro text-white px-6 py-3 rounded-full hover:bg-azul-medio transition">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal4" class="fixed inset-0 bg-black/60 modal-backdrop hidden items-center justify-center z-50" onclick="closeModal('modal4')">
+            <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 modal-content" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold text-azul-oscuro">Jugo Natural</h2>
+                    <button onclick="closeModal('modal4')" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                </div>
+                <img src="img/jugo natural.png" alt="Jugo Natural" class="w-full h-64 object-cover rounded-xl mb-4" />
+                <p class="text-gray-600 mb-4">Jugo 100% natural sin conservantes ni azúcares añadidos. Variedad de sabores: naranja, mango, lulo y mora. Presentación de 1 litro. Frescura garantizada.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-3xl font-bold text-azul-medio">$6.800</span>
+                    <button class="bg-azul-claro text-white px-6 py-3 rounded-full hover:bg-azul-medio transition">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal5" class="fixed inset-0 bg-black/60 modal-backdrop hidden items-center justify-center z-50" onclick="closeModal('modal5')">
+            <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 modal-content" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold text-azul-oscuro">Shampoo Premium</h2>
+                    <button onclick="closeModal('modal5')" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                </div>
+                <img src="img/shampoo.png" alt="Shampoo" class="w-full h-64 object-cover rounded-xl mb-4" />
+                <p class="text-gray-600 mb-4">Shampoo de alta calidad para todo tipo de cabello. Fórmula enriquecida con extractos naturales. Presentación de 400ml. Hidratación y brillo garantizados.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-3xl font-bold text-azul-medio">$18.900</span>
+                    <button class="bg-azul-claro text-white px-6 py-3 rounded-full hover:bg-azul-medio transition">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal6" class="fixed inset-0 bg-black/60 modal-backdrop hidden items-center justify-center z-50" onclick="closeModal('modal6')">
+            <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 modal-content" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold text-azul-oscuro">Detergente Multiusos</h2>
+                    <button onclick="closeModal('modal6')" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                </div>
+                <img src="img/detergente.png" alt="Detergente" class="w-full h-64 object-cover rounded-xl mb-4" />
+                <p class="text-gray-600 mb-4">Detergente líquido de alta eficiencia para todo tipo de ropa. Elimina manchas difíciles y cuida las fibras. Presentación de 1 litro. Fragancia fresca duradera.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-3xl font-bold text-azul-medio">$12.500</span>
+                    <button class="bg-azul-claro text-white px-6 py-3 rounded-full hover:bg-azul-medio transition">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal7" class="fixed inset-0 bg-black/60 modal-backdrop hidden items-center justify-center z-50" onclick="closeModal('modal7')">
+            <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 modal-content" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold text-azul-oscuro">Bananos Premium</h2>
+                    <button onclick="closeModal('modal7')" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                </div>
+                <img src="img/bananos.png" alt="Bananos" class="w-full h-64 object-cover rounded-xl mb-4" />
+                <p class="text-gray-600 mb-4">Bananos frescos de las mejores fincas colombianas. Ricos en potasio y energía natural. Perfectos para el desayuno o meriendas. Precio por kilogramo.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-3xl font-bold text-azul-medio">$3.200</span>
+                    <button class="bg-azul-claro text-white px-6 py-3 rounded-full hover:bg-azul-medio transition">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCRIPTS -->
+        <script>
+            // MODAL FUNCTIONS
+            function openModal(id) {
+                const modal = document.getElementById(id);
+                if(modal) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeModal(id) {
+                const modal = document.getElementById(id);
+                if(modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Close modals with ESC key
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'Escape') {
+                    document.querySelectorAll('[id^="modal"]').forEach(m => {
+                        m.classList.add('hidden');
+                        m.classList.remove('flex');
+                    });
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // NAV TOGGLE
+            const navToggle = document.getElementById('nav-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            navToggle?.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // MODERN AUTO-PLAY CAROUSEL LOGIC
+            const track = document.getElementById('track');
+            const carousel = document.getElementById('carousel');
+            const indicators = document.getElementById('indicators');
+            let slides = track ? Array.from(track.children) : [];
+            let index = 0;
+            let autoPlayInterval;
+            let isPaused = false;
+
+            function renderIndicators() {
+                if(!indicators) return;
+                indicators.innerHTML = '';
+                slides.forEach((s,i)=>{
+                    const btn = document.createElement('button');
+                    btn.className = 'w-3 h-3 rounded-full bg-gray-300/60 transition-all duration-300 hover:bg-azul-claro';
+                    btn.addEventListener('click', ()=>{ 
+                        goTo(i); 
+                        resetAutoPlay();
+                    });
+                    indicators.appendChild(btn);
+                });
+                highlightIndicator();
+            }
+
+            function highlightIndicator(){
+                if(!indicators) return;
+                Array.from(indicators.children).forEach((b, i)=>{
+                    if(i === index) {
+                        b.classList.remove('bg-gray-300/60', 'w-3');
+                        b.classList.add('bg-azul-medio', 'w-8');
+                    } else {
+                        b.classList.remove('bg-azul-medio', 'w-8');
+                        b.classList.add('bg-gray-300/60', 'w-3');
+                    }
+                });
+            }
+
+            function goTo(i){
+                if(!slides.length) return;
+                // Loop infinito
+                if(i >= slides.length) i = 0;
+                if(i < 0) i = slides.length - 1;
+                index = i;
+                
+                const slideWidth = slides[0].getBoundingClientRect().width + 24; // gap
+                if(track) track.style.transform = translateX(-${index * slideWidth}px);
+                highlightIndicator();
+            }
+
+            function nextSlide() {
+                goTo(index + 1);
+            }
+
+            function prevSlide() {
+                goTo(index - 1);
+            }
+
+            function startAutoPlay() {
+                if(autoPlayInterval) clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(() => {
+                    if(!isPaused) {
+                        nextSlide();
+                    }
+                }, 5000); // Cambia cada 5 segundos
+            }
+
+            function resetAutoPlay() {
+                startAutoPlay();
+            }
+
+            // Pausar cuando el mouse está sobre el carousel
+            carousel?.addEventListener('mouseenter', () => {
+                isPaused = true;
+            });
+
+            carousel?.addEventListener('mouseleave', () => {
+                isPaused = false;
+            });
+
+            // init
+            window.addEventListener('load', ()=>{
+                slides = track ? Array.from(track.children) : [];
+                renderIndicators();
+                goTo(0);
+                startAutoPlay(); // Iniciar auto-play
+                // responsive: recalc on resize
+                window.addEventListener('resize', ()=> goTo(index));
+            });
+        </script>
+    </body>
+</html>
